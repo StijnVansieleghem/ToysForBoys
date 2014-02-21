@@ -11,7 +11,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd'>
 		<class>be.vdab.entities.Country</class>
 		<class>be.vdab.valueobjects.Orderdetail</class>
 		<class>be.vdab.valueobjects.Adres</class>
-		<properties>
+		<properties> 
 			<property name='hibernate.show_sql' value='true' />
 			<property name='hibernate.format_sql' value='true' />
 			<property name='hibernate.use_sql_comments' value='true' />

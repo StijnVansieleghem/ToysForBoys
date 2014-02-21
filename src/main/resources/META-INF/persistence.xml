@@ -4,7 +4,7 @@
 	xsi:schemaLocation='http://java.sun.com/xml/ns/persistence
 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd'>
 	<persistence-unit name='toysforboys'>
-		<non-jta-data-source>jdbc:cloudbees://toysforboyssv</non-jta-data-source>
+		<non-jta-data-source>java:/comp/env/jdbc/toysforboyssv</non-jta-data-source>
 		<class>be.vdab.entities.Order</class>
 		<class>be.vdab.entities.Customer</class>
 		<class>be.vdab.entities.Product</class>

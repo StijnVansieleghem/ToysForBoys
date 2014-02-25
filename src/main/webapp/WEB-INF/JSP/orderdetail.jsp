@@ -48,12 +48,12 @@
 								value='${orderDetail.priceEach}' minFractionDigits='2' /></td>
 						<td class="align_right"><fmt:formatNumber value=''
 								minFractionDigits='2' />${orderDetail.quantityOrdered}</td>
-						<td><fmt:formatNumber value='' />${orderDetail.value}</td>
+						<td>&euro; <fmt:formatNumber value='${orderDetail.value}' minFractionDigits='2' /></td>
 					</tr>
 				</c:forEach>
 			</table>
 			<p>
-				Value: <span class="bold"><br /> <fmt:formatNumber
+				Value: <span class="bold"><br />&euro; <fmt:formatNumber
 						value='${order.value}' minFractionDigits='2' /></span>
 
 			</p>

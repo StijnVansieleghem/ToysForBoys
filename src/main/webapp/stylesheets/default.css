@@ -1,13 +1,14 @@
 body {
+	background-color: #F0F8FF;
 	font-family: Verdana;
 }
 
-input[type="submit"]{
-	margin-top:10px;
+input[type="submit"] {
+	margin-top: 10px;
 }
 
 table,th,td {
-	border: 1px solid silver;
+	border: 1px solid #5B86A1;
 	border-collapse: collapse;
 }
 
@@ -21,17 +22,36 @@ td {
 	padding-right: 0.2em;
 }
 
-th{
-	color:#FFF;
-	background-color:#5B5B5B;
+th {
+	color: #FFF;
+	background-color: #4D6F7F;
 }
 
 tbody tr:nth-child(even) {
-	background-color: #FAFAFA;
+	background-color: #A3D5FF;
 }
 
 tbody tr:nth-child(odd) {
-	background-color: #E6E6E6;
+	background-color: #78B1D4;
+}
+
+h1,h2,h3 {
+	color: #003455;
+}
+
+button,html input[type="button"],input[type="reset"],input[type="submit"]
+	{
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+a {
+	color: #000;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: gray;
 }
 
 /* ETC */
@@ -52,19 +72,19 @@ tbody tr:nth-child(odd) {
 	text-transform: capitalize;
 }
 
-p.pagination{
-	margin-top:10px;
-	text-align:center;
+p.pagination {
+	margin-top: 10px;
+	text-align: center;
 }
 
-p.pagination a{
-	text-decoration:none;
+p.pagination a {
+	text-decoration: none;
 }
 
 .bold {
-	font-weight:bold;
+	font-weight: bold;
 }
 
-.fouten{
-	color:red;
+.fouten {
+	color: red;
 }

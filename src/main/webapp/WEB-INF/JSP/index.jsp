@@ -1,4 +1,5 @@
-<%@ page contentType='text/html' pageEncoding='UTF-8' session='false' trimDirectiveWhitespaces="true" %>
+<%@ page contentType='text/html' pageEncoding='UTF-8' session='false'
+	trimDirectiveWhitespaces="true"%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
 <c:set var='contextPath'
@@ -40,7 +41,7 @@
 						<td>${order.customer.name}</td>
 						<td>${order.comments}</td>
 						<td class="lowercase">${order.status}</td>
-						<td><input name="orderID" type="checkbox"
+						<td><input class="orderId" name="orderID" type="checkbox"
 							value="${order.orderID}" /></td>
 					</tr>
 				</c:forEach>
@@ -68,5 +69,35 @@
 		</form>
 		<c:import url='/WEB-INF/JSP/fouten.jsp' />
 	</section>
+	<script
+		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>
+		$('document').ready(
+				function() {
+					$('#setShipped').click(function(event) {
+						getValues();
+					});
+					function getValues() {
+						var arrValues = [];
+						$('.orderId:checked').each(function() {
+							arrValues.push($(this).val());
+						});
+						if (arrValues.length == 0) {
+							event.preventDefault();
+							alert('Selecteer tenminste 1 order');
+						} else {
+							var verwijderd = "";
+							arrValues.forEach(function(entry) {
+								verwijderd += entry + '\n';
+							});
+							alert('De volgende orders zijn verwijderd: \n\n'
+									+ verwijderd);
+							$.post('index.htm', {
+								'orderIds[]' : arrValues
+							});
+						}
+					}
+				});
+	</script>
 </body>
 </html>

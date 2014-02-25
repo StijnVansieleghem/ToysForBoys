@@ -22,32 +22,39 @@ public class UnshippedOrderServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		int vanafRij = request.getParameter("vanafRij") == null ? 0 : Integer
-				.parseInt(request.getParameter("vanafRij"));
-		request.setAttribute("vanafRij", vanafRij);
-		request.setAttribute("aantalRijen", AANTAL_RIJEN);
-		Iterable<Order> orders = orderService.findAllUnshippedOrders(vanafRij,
-				AANTAL_RIJEN + 1);
-		if (!orders.iterator().hasNext()) {
-		} else {
-			List<Order> ordersList = (List<Order>) orders;
-			if (ordersList.size() <= AANTAL_RIJEN) {
-				request.setAttribute("laatstePagina", true);
+		try {
+			int vanafRij = request.getParameter("vanafRij") == null ? 0
+					: Integer.parseInt(request.getParameter("vanafRij"));
+			request.setAttribute("vanafRij", vanafRij);
+			request.setAttribute("aantalRijen", AANTAL_RIJEN);
+			Iterable<Order> orders = orderService.findAllUnshippedOrders(
+					vanafRij, AANTAL_RIJEN + 1);
+			if (!orders.iterator().hasNext()) {
 			} else {
-				ordersList.remove(AANTAL_RIJEN);
+				List<Order> ordersList = (List<Order>) orders;
+				if (ordersList.size() <= AANTAL_RIJEN) {
+					request.setAttribute("laatstePagina", true);
+				} else {
+					ordersList.remove(AANTAL_RIJEN);
+				}
+				request.setAttribute("unshippedOrders", ordersList);
 			}
-			request.setAttribute("unshippedOrders", ordersList);
+			request.getRequestDispatcher(VIEW).forward(request, response);
+		} catch (Exception ex) {
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()));
 		}
-		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		for (String orderIDs : request.getParameterValues("orderID")) {
-			Long orderID = Long.parseLong(orderIDs);
-			orderService.setAsShipped(orderID);
+		try {
+			for (String orderIDs : request.getParameterValues("orderID")) {
+				Long orderID = Long.parseLong(orderIDs);
+				orderService.setAsShipped(orderID);
+			}
+		} catch (Exception ex) {
 		}
 		response.sendRedirect(response.encodeRedirectURL(request
 				.getContextPath()));

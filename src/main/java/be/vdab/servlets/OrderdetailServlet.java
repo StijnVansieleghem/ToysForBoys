@@ -20,16 +20,13 @@ public class OrderdetailServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("orderDetail") != null) {
-			try {
-				long orderID = Long.parseLong(request
-						.getParameter("orderDetail"));
-				Order order = orderService.read(orderID);
-				request.setAttribute("order", order);
-			} catch (NumberFormatException e) {
-			}
-		} else {
+		try {
+			long orderID = Long.parseLong(request.getParameter("orderDetail"));
+			Order order = orderService.read(orderID);
+			request.setAttribute("order", order);
+			request.getRequestDispatcher(VIEW).forward(request, response);
+		} catch (Exception ex) {
+			response.sendRedirect(response.encodeRedirectURL("index.htm"));
 		}
-		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 }
